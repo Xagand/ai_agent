@@ -2,13 +2,21 @@ import os, sys
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from functions.get_files_info import get_files_info
+
+
 def main():
     
     
     load_dotenv()
     key = os.environ.get("GEMINI_API_KEY")
     client = genai.Client(api_key=key)
+    
+    if len(sys.argv) == 1:
+        raise Exception("Needs a question")
+    
     user_prompt = sys.argv[1]
+    
     messages = [
         types.Content(role="user", parts=[types.Part(text=user_prompt)]),
     ]
