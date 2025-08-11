@@ -21,7 +21,7 @@ def get_files_info(working_directory:str, directory=".") -> str:
             file_path = abs_path + f"/{file_name}"
             content_lst.append(f"- {file_name}: file_size={os.path.getsize(file_path)} bytes, is_dir={os.path.isdir(file_path)}")
         content = "\n".join(content_lst)
-        #print(f"{result}\n{content}")
+        
         return f"{result}\n{content}"       
     except Exception as e:
         return f"Error: {e}"

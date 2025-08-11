@@ -8,4 +8,10 @@ wheels/
 
 # Virtual environments
 .venv
+
+# API Key
 .env
+
+# Tests
+tests.py/
+calculator/
