@@ -1,5 +1,7 @@
 import os
 from config import LIMIT_PER_FILE
+from google import genai
+from google.genai import types
 
 def get_file_content(working_directory:str, file_path:str) -> str:
     try:
@@ -18,3 +20,17 @@ def get_file_content(working_directory:str, file_path:str) -> str:
         return content    
     except Exception as e:
         return f"Error: {e}"
+    
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Read file content. Not more then 10000 charecters per file",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The file to read from.",
+            ),
+        },
+    ),
+)    

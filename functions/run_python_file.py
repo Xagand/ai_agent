@@ -1,5 +1,8 @@
 import os
 import subprocess
+from google import genai
+from google.genai import types
+
 
 def run_python_file(working_directory:str, file_path:str, args=[]) :
     try:
@@ -31,3 +34,21 @@ STDERR: {completed_process.stderr}"""
         return result
     except Exception as e:
         return f"Error: executing Python file:{e}"    
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Running any python file. Timeout in 30 seconds.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Python file to run"),
+            "args":  types.Schema(
+                type=types.Type.STRING,
+                description="List of additional args if required for running programm"
+           
+            ),
+        },
+    ),
+)            
